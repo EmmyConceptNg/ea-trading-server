@@ -1,0 +1,13 @@
+{
+  "name": "ea-trading",
+  "version": "1.0.0",
+  "description": "cryptocurrency investment app by ea-trading",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start" : "nodemon sever.js"
+  },
+  "author": "kolawole emmanuel",
+  "license": "ISC"
+}
