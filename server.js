@@ -9,10 +9,30 @@ app.use(cors())
 dotenv.config()
 app.use(express.json())
 
+import AdminWalletAddress from "./routes/admin/WalletAddressRoutes.js";
+import Auth from './routes/AuthRoutes.js'
+import AdminUsers from './routes/admin/UsersRoutes.js'
+import Subscriptions from  './routes/SubscriptionsRoutes.js'
+import AdminSubscriptions from "./routes/admin/AdminSubscriptionsRoutes.js";
+import AdminSettings from './routes/admin/SettingsRoutes.js'
+import ROI from './routes/ROIRoutes.js'
+
+
+app.use('/api/auth', Auth)
+app.use('/api/subscriptions', Subscriptions)
+app.use('/api/roi', ROI)
 
 
 
-const PORT = process.env.PORT || 5000;
+
+// Admin Routes
+app.use("/api/admin/users", AdminUsers);
+app.use('/api/admin/subscriptions', AdminSubscriptions)
+app.use("/api/admin/wallet-address", AdminWalletAddress);
+app.use("/api/admin/settings", AdminSettings);
+
+
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, async () => {
   console.log(`Server running on port ${PORT}`);
   console.log("connecting to mongodb...");
