@@ -29,12 +29,13 @@ const userSchema = mongoose.Schema(
     },
     bot: {
       name: String,
-      amount: Number,
-      roi : Number,
+      amount: {type : Number, default : 0},
+      roi :  {type : Number, default : 0},
       months : String
     },
-    roi: Number,
-    totalRoi: Number,
+    roi:  {type : Number, default : 0},
+    totalRoi:  {type : Number, default : 0},
+    withdrawal:  {type : Number, default : 0},
     profileImage: String,
     emailVerificationToken: String,
     passwordVerificationToken: String,
