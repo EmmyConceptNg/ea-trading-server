@@ -59,13 +59,13 @@ export const toggleStatus = async (req, res) => {
 
     if (user.subscribed && user.referral) {
       const referee = await User.findOne({ referralCode: user.referral });
-      if (!referee.referralPaid) {
+      
         referee.referralEarned += 50;
         referee.roi += 50;
         referee.referralCount += 1;
         referee.referralPaid = true;
         await referee.save();
-      }
+      
     }
     return res
       .status(200)
