@@ -48,12 +48,25 @@ export const toggleStatus = async (req, res) => {
       { new: true }
     );
 
+   
     const user = await User.findOneAndUpdate(
       { _id: userId },
       { subscribed: updatedSubscription.verified },
       { new: true }
     );
 
+    
+
+    if (user.subscribed && user.referral) {
+      const referee = await User.findOne({ referralCode: user.referral });
+      if (!referee.referralPaid) {
+        referee.referralEarned += 50;
+        referee.roi += 50;
+        referee.referralCount += 1;
+        referee.referralPaid = true;
+        await referee.save();
+      }
+    }
     return res
       .status(200)
       .json({

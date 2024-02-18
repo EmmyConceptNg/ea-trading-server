@@ -29,23 +29,33 @@ const userSchema = mongoose.Schema(
     },
     bot: {
       name: String,
-      amount: {type : Number, default : 0},
-      roi :  {type : Number, default : 0},
-      months : String
+      amount: { type: Number, default: 0 },
+      roi: { type: Number, default: 0 },
+      months: String,
     },
-    roi:  {type : Number, default : 0},
-    totalRoi:  {type : Number, default : 0},
-    withdrawal:  {type : Number, default : 0},
+    roi: { type: Number, default: 0 },
+    totalRoi: { type: Number, default: 0 },
+    withdrawal: { type: Number, default: 0 },
     profileImage: String,
     emailVerificationToken: String,
     passwordVerificationToken: String,
-    verified : {
+    verified: {
       type: Boolean,
       default: false,
-    }, subscribed : {
+    },
+    subscribed: {
       type: Boolean,
       default: false,
-    }
+    },
+    referralPaid: {
+      type: Boolean,
+      default: false,
+    },
+    referralEarned: {
+      type: Number,
+      default: 0,
+    },
+    referralCount : {type : Number, default : 0}
   },
   { timestamps: true }
 );

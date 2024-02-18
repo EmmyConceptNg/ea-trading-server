@@ -20,6 +20,7 @@ import Dashboard from "./routes/DashboardRoutes.js";
 import AdminDashboard from "./routes/admin/AdminDashboardRoutes.js";
 import Withdrawals from "./routes/WithdrawalsRoutes.js";
 import AdminWithdrawals from "./routes/admin/AdminWithdrawalsRoutes.js";
+import Referral from './routes/ReferralRoutes.js'
 
 
 app.use('/api/auth', Auth)
@@ -27,6 +28,9 @@ app.use('/api/subscriptions', Subscriptions)
 app.use('/api/roi', ROI)
 app.use('/api/dashboard', Dashboard)
 app.use('/api/withdrawals', Withdrawals)
+app.use('/api/referral', Referral)
+
+
 
 
 

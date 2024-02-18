@@ -11,7 +11,7 @@ import path from "path";
 import fs from "fs";
 
 export const register = async (req, res) => {
-  const { email, network, walletAddress, bot, duration } = req.body;
+  const { email, network, walletAddress, bot, duration, referral } = req.body;
 
   const password = generateStringStartingWithEaTrade(10);
 
@@ -34,6 +34,7 @@ export const register = async (req, res) => {
         bot,
         password: hashedPassword,
         referralCode: referralCode,
+        referral,
       });
 
       // Create the subscription
