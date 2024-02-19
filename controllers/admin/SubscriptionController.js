@@ -42,6 +42,15 @@ export const toggleStatus = async (req, res) => {
       return res.status(400).json({ error: "Could not find subscription" });
     }
 
+
+    // checking if subscription is already active and referral has been paid
+const findUser = await User.findOne({ _id: userId });
+if(findUser.subscribed && findUser.referral){
+  return res.status(500).json({error : 'Cannot deactivate subscription because referral has been paid'});
+}
+
+
+
     const updatedSubscription = await Subscription.findOneAndUpdate(
       { _id: subscriptionId },
       { verified: !subscription.verified },
@@ -59,13 +68,13 @@ export const toggleStatus = async (req, res) => {
 
     if (user.subscribed && user.referral) {
       const referee = await User.findOne({ referralCode: user.referral });
-      if (!referee.referralPaid) {
+      
         referee.referralEarned += 50;
         referee.roi += 50;
         referee.referralCount += 1;
         referee.referralPaid = true;
         await referee.save();
-      }
+      
     }
     return res
       .status(200)

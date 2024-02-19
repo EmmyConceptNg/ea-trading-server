@@ -16,7 +16,7 @@ export const sendMail = (receiver, subject, html) => {
     // debug: true, // More detailed debugging info
   });
 
-  console.log(process.env.ADMIN_MAIL);
+  // console.log(process.env.ADMIN_MAIL);
   // Setup email data
   const mailOptions = {
     from: process.env.ADMIN_MAIL,

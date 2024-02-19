@@ -130,6 +130,10 @@ export const checkEmail = async (req, res) => {
 
 export const kyc = async (req, res) => {
   try {
+
+
+
+    
     // Retrieve form data including uploaded files
     const {
       firstName,
@@ -140,6 +144,22 @@ export const kyc = async (req, res) => {
       userId,
     } = req.body;
     const { identityImage, profileImage } = req.files;
+
+    // Validation: Check if required fields are provided
+    if (
+      !firstName ||
+      !lastName ||
+      !identityType ||
+      !network ||
+      !walletAddress ||
+      !userId ||
+      !identityImage ||
+      !profileImage
+    ) {
+      return res
+        .status(400)
+        .json({ error: "Please provide all required fields" });
+    }
 
     // Process the uploaded files
     const imagePath = identityImage[0].path;
@@ -158,13 +178,11 @@ export const kyc = async (req, res) => {
       { new: true }
     );
 
-    res
-      .status(201)
-      .json({
-        user,
-        message:
-          "User details updated successfully. Please wait while we verify your details",
-      });
+    res.status(201).json({
+      user,
+      message:
+        "User details updated successfully. Please wait while we verify your details",
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -179,6 +197,22 @@ export const kycStatus = async (req, res) => {
       const kycStatus = user.verified;
 
       res.status(200).json({ kycStatus });
+    } else {
+      res.status(400).json({ error: "Cannot find user" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+export const subscriptionStatus = async (req, res) => {
+  const { userId } = req.params;
+
+  try {
+    const user = await User.findOne({ _id: userId });
+    if (user) {
+      const subscriptionStatus = user.subscribed;
+
+      res.status(200).json({ subscriptionStatus });
     } else {
       res.status(400).json({ error: "Cannot find user" });
     }
