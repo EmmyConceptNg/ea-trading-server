@@ -37,7 +37,8 @@ export const ROI = async (req, res) => {
     }
 
     // Respond with success message
-    return res.status(200).json({ message: "ROI updated successfully" });
+     console.log("ROI updated successfully");
+     return;
   } catch (error) {
     // Handle errors
     console.error("Error updating ROI:", error);
